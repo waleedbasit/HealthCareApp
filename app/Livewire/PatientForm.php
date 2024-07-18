@@ -15,11 +15,11 @@ class PatientForm extends Component
         'patient.first_name' => 'required|string|max:255',
         'patient.last_name' => 'required|string|max:255',
         'patient.email' => 'required|email|max:255',
-        'patient.phone_number' => 'required|string|max:20',
+        'patient.phone_number' => 'required|string|max:20|regex:/^\+?[0-9\-]{7,20}$/',
         'patient.nhs_number' => 'required|string|max:20',
         'patient.address' => 'required|string|max:255',
         'patient.date_of_birth' => 'required|date',
-        'patient.sex' => 'required|string|max:10',
+        'patient.sex' => 'required|string|in:male,female,other|max:10',
     ];
 
     public function mount($action, $patientId = null)
