@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Patient;
 use App\Models\User;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -34,5 +36,18 @@ class DatabaseSeeder extends Seeder
                 "remember_token" => Str::random(10),
             ]
         );
+        $faker = Faker::create();
+        for ($i = 0; $i < 10; $i++) {
+            Patient::create([
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'email' => $faker->unique()->safeEmail,
+                'phone_number' => $faker->phoneNumber,
+                'nhs_number' => $faker->randomNumber(5),
+                'address' => $faker->address,
+                'date_of_birth' => $faker->date($format = 'Y-m-d', $max = 'now'),
+                'sex' => $faker->randomElement(['male', 'female','other']),
+            ]);
+        }
     }
 }
